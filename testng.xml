@@ -12,7 +12,12 @@
 
 	<test name="DataDriven Tests">
 		<classes>
-			<class name="Tests.TestCase" />
+			<class name="Tests.HomeTest" />
+		</classes>
+	</test> <!-- Test -->
+	<test name="DataDriven Tests">
+		<classes>
+			<class name="Tests.UserLoginTests" />
 		</classes>
 	</test> <!-- Test -->
 </suite> <!-- Suite -->

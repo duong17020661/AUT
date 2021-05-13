@@ -13,19 +13,19 @@ public class UserLoginTests extends TestBase{
 	@When("^Enter the Username \"(.*)\" and Password \"(.*)\"$")
 	public void ManagerLoginTest() throws Throwable {
 
-		loginPage.login("admin@localhost.com", "1111111");
+		loginPage.login("admin@localhost.com", "11111111");
 		Thread.sleep(2000);
 
 	}
 	public void ClientLoginTest() throws Throwable {
 
-		loginPage.login("admin@localhost.com", "11111111");
+		loginPage.login("adm111in@localhost.com", "11111111");
 		Thread.sleep(2000);
 
 	}
 	public void DesignerLoginTest() throws Throwable {
 
-		loginPage.login("admin@localhost.com", "11111111");
+		loginPage.login("admi222n@localhost.com", "11111111");
 		Thread.sleep(2000);
 	}
 
