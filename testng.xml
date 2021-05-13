@@ -10,12 +10,12 @@
 	</listeners>
 
 
-	<test name="DataDriven Tests">
+	<test name="Failed Test">
 		<classes>
 			<class name="Tests.HomeTest" />
 		</classes>
 	</test> <!-- Test -->
-	<test name="DataDriven Tests">
+	<test name="Login Tests">
 		<classes>
 			<class name="Tests.UserLoginTests" />
 		</classes>
