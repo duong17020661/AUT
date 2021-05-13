@@ -12,7 +12,7 @@
 
 	<test name="DataDriven Tests">
 		<classes>
-			<class name="Tests.UserLoginTests" />
+			<class name="Tests.TestCase" />
 		</classes>
 	</test> <!-- Test -->
 </suite> <!-- Suite -->
