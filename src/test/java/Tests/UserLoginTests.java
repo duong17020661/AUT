@@ -1,6 +1,7 @@
 package Tests;
 
 import cucumber.api.java.en.When;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import pageObjects.LoginPageObjects;

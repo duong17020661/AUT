@@ -92,38 +92,41 @@ public class JiraOperations {
 	
 	//creates payload for create issue post request
 	private static String createPayloadForCreateJiraIssue(String ProjectName, String issueSummary, String issueDescription, String componentId, String priority, String label, String env, String assigneeId) {
-		return "{\r\n" + 
-				"    \"fields\": {\r\n" + 
-				"       \"project\":\r\n" + 
-				"       {\r\n" + 
-				"          \"key\": \""+ProjectName+"\"\r\n" + 
-				"       },\r\n" + 
-				"       \"summary\": \""+issueSummary+"\",\r\n" + 
-				"	   \"description\": {\r\n" + 
-				"          \"type\": \"doc\",\r\n" + 
-				"          \"version\": 1,\r\n" + 
-				"          \"content\": [\r\n" + 
-				"				{\r\n" + 
-				"                    \"type\": \"paragraph\",\r\n" + 
-				"                    \"content\": [\r\n" + 
-				"								{\r\n" + 
-				"                                    \"text\": \""+issueDescription+"\",\r\n" + 
-				"                                    \"type\": \"text\"\r\n" + 
-				"								}\r\n" + 
-				"							   ]\r\n" + 
-				"				}\r\n" + 
-				"					]\r\n" + 
-				"						}, \r\n" + 
-				"		\"issuetype\": {\r\n" + 
-				"          \"name\": \"Bug\"\r\n" + 
-				"       },\r\n" +
-				"        \"labels\": [\r\n" + 
-				"      \""+label+"\"\r\n" + 
-				"    ],\r\n" +
-				"    	\"assignee\": {\r\n" + 
-				"      \"id\": \""+assigneeId+"\"\r\n" + 
-				"    }\r\n" + 
-				"}\r\n" + 
+		return "{\n" +
+				"\"fields\": {\n" +
+				"    \"summary\": \"Main order flow broken\",\n" +
+				"    \"issuetype\": {\n" +
+				"      \"id\": \"10004\"\n" +
+				"    },\n" +
+				"    \"project\": {\n" +
+				"      \"id\": \"10000\"\n" +
+				"    },\n" +
+				"    \"description\": {\n" +
+				"      \"type\": \"doc\",\n" +
+				"      \"version\": 1,\n" +
+				"      \"content\": [\n" +
+				"        {\n" +
+				"          \"type\": \"paragraph\",\n" +
+				"          \"content\": [\n" +
+				"            {\n" +
+				"              \"text\": \"Order entry fails when selecting supplier.\",\n" +
+				"              \"type\": \"text\"\n" +
+				"            }\n" +
+				"          ]\n" +
+				"        }\n" +
+				"      ]\n" +
+				"    },\n" +
+				"    \"reporter\": {\n" +
+				"      \"id\": \"606a7a842b469c00701afd8d\"\n" +
+				"    },\n" +
+				"    \"labels\": [\n" +
+				"      \"AUT\"\n" +
+				"    ],\n" +
+				"\n" +
+				"    \"assignee\": {\n" +
+				"      \"id\": \"606a7a842b469c00701afd8d\"\n" +
+				"    }\n" +
+				"  }\n" +
 				"}";
 	}
 }
