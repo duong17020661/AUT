@@ -85,7 +85,6 @@ public class JiraOperations {
 			}
 		}
 	
-	//creates payload for create issue post request
 	private static String createPayloadForCreateJiraIssue(String ProjectName, String issueSummary, String issueDescription, String componentId, String priority, String label, String env, String assigneeId) {
 		return "{\n" +
 				"\"fields\": {\n" +
