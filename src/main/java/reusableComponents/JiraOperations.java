@@ -89,7 +89,7 @@ public class JiraOperations {
 	private static String createPayloadForCreateJiraIssue(String ProjectName, String issueSummary, String issueDescription, String componentId, String priority, String label, String env, String assigneeId) {
 		return "{\n" +
 				"\"fields\": {\n" +
-				"    \"summary\": \"Main order flow broken\",\n" +
+				"    \"summary\": \"" + ProjectName + ": " + issueSummary + "\",\n" +
 				"    \"issuetype\": {\n" +
 				"      \"id\": \"10004\"\n" +
 				"    },\n" +
@@ -104,7 +104,7 @@ public class JiraOperations {
 				"          \"type\": \"paragraph\",\n" +
 				"          \"content\": [\n" +
 				"            {\n" +
-				"              \"text\": \"Order entry fails when selecting supplier.\",\n" +
+				"              \"text\": \"" + issueDescription + "\",\n" +
 				"              \"type\": \"text\"\n" +
 				"            }\n" +
 				"          ]\n" +
@@ -119,7 +119,7 @@ public class JiraOperations {
 				"    ],\n" +
 				"\n" +
 				"    \"assignee\": {\n" +
-				"      \"id\": \"606a7a842b469c00701afd8d\"\n" +
+				"      \"id\": \"" + assigneeId + "\"\n" +
 				"    }\n" +
 				"  }\n" +
 				"}";
