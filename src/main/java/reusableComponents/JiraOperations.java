@@ -25,7 +25,7 @@ public class JiraOperations {
 
 
 	//create Jira Issue as bug
-	public String createJiraIssue(String ProjectName, String issueSummary, String issueDescription, String component, String priority, String label, String env, String assignee) throws ClientProtocolException, IOException, ParseException {
+	public String createJiraIssue(String ProjectName, String issueSummary, String issueDescription, String label, String assignee) throws ClientProtocolException, IOException, ParseException {
 		
 		String issueId = null; //to store issue / bug id.
 		
@@ -37,8 +37,7 @@ public class JiraOperations {
 		String encoding = Base64.getEncoder().encodeToString((jiraUserName+":"+jiraAccessKey).getBytes());
 		postRequest.setHeader("Authorization", "Basic " + encoding);
 
-		String str = createPayloadForCreateJiraIssue(ProjectName, issueSummary, issueDescription, component, priority, label, env, assignee);
-		StringEntity params = new StringEntity(createPayloadForCreateJiraIssue(ProjectName, issueSummary, issueDescription, component, priority, label, env, assignee));
+		StringEntity params = new StringEntity(createPayloadForCreateJiraIssue(ProjectName, issueSummary, issueDescription, label, assignee));
 		params.setContentType("application/json");
 		postRequest.setEntity(params);
 		HttpResponse response = httpClient.execute(postRequest);
@@ -85,10 +84,11 @@ public class JiraOperations {
 			}
 		}
 	
-	private static String createPayloadForCreateJiraIssue(String ProjectName, String issueSummary, String issueDescription, String componentId, String priority, String label, String env, String assigneeId) {
+	//creates payload for create issue post request
+	private static String createPayloadForCreateJiraIssue(String ProjectName, String issueSummary, String issueDescription, String label, String assigneeId) {
 		return "{\n" +
 				"\"fields\": {\n" +
-				"    \"summary\": \"" + ProjectName + ": " + issueSummary + "\",\n" +
+				"    \"summary\": \"" + ProjectName + ": " + issueSummary+ "\",\n" +
 				"    \"issuetype\": {\n" +
 				"      \"id\": \"10004\"\n" +
 				"    },\n" +
@@ -103,7 +103,7 @@ public class JiraOperations {
 				"          \"type\": \"paragraph\",\n" +
 				"          \"content\": [\n" +
 				"            {\n" +
-				"              \"text\": \"" + issueDescription + "\",\n" +
+				"              \"text\": \"Description\",\n" +
 				"              \"type\": \"text\"\n" +
 				"            }\n" +
 				"          ]\n" +
@@ -114,11 +114,11 @@ public class JiraOperations {
 				"      \"id\": \"606a7a842b469c00701afd8d\"\n" +
 				"    },\n" +
 				"    \"labels\": [\n" +
-				"      \"AUT\"\n" +
+				"      \""+label+"\"\n" +
 				"    ],\n" +
 				"\n" +
 				"    \"assignee\": {\n" +
-				"      \"id\": \"" + assigneeId + "\"\n" +
+				"      \"id\": \""+assigneeId+"\"\n" +
 				"    }\n" +
 				"  }\n" +
 				"}";

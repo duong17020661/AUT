@@ -79,7 +79,7 @@ public class ListenersImplementation implements ITestListener{
 			String issueD = "Kiểm thử thành công.";
 			String issueNumber = null;
 			try {
-				issueNumber = jiraOps.createJiraIssue("AUT", issueS, issueD, "10000", "5", "TỰ động kiểm thử", "SIT", "606a7a842b469c00701afd8d");
+				issueNumber = jiraOps.createJiraIssue("AutoTest", issueS, issueD, "AUT", "606a7a842b469c00701afd8d");
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
