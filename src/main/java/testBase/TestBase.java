@@ -12,7 +12,6 @@ import reusableComponents.PropertiesOperations;
 
 public class TestBase extends ActionEngine {
 	BrowserFactory bf = new BrowserFactory();
-
 	@BeforeMethod
 	public void LaunchApplication() throws Exception {
 		String browser = PropertiesOperations.getPropertyValueByKey("browser");
@@ -25,8 +24,6 @@ public class TestBase extends ActionEngine {
 		DriverFactory.getInstance().getDriver().navigate().to(url);
 
 	}
-
-	@AfterMethod
 	public void tearDown() {
 		DriverFactory.getInstance().closeBrowser();
 	}

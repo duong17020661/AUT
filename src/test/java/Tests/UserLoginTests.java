@@ -11,9 +11,7 @@ import testBase.TestBase;
 public class UserLoginTests extends TestBase{
 	LoginPageObjects loginPage = new LoginPageObjects();
 
-	@When("^Enter the Username \"(.*)\" and Password \"(.*)\"$")
 	public void ManagerLoginTest() throws Throwable {
-
 		loginPage.login("admin@localhost.com", "11111111");
 		Thread.sleep(2000);
 

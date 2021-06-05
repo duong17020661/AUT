@@ -1,10 +1,7 @@
 package pageObjects;
 
 
-import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
-
-import org.testng.Assert;
 import testBase.DriverFactory;
 import testBase.TestBase;
 
@@ -17,7 +14,6 @@ public class LoginPageObjects extends TestBase  {
 		sendKeys_custom(DriverFactory.getInstance().getDriver().findElement(EMAIL), "LoginEmailFIeld", email);
 		sendKeys_custom(DriverFactory.getInstance().getDriver().findElement(PASSWORD), "LoginPasswordFIeld", password);
 		click_custom(DriverFactory.getInstance().getDriver().findElement(LOGIN_BTN), "LoginButton");
-		Assert.assertTrue("name" == email);
 	}
 }
 

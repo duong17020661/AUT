@@ -18,11 +18,6 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import sun.misc.BASE64Encoder;
 
-/**
- * @author: Prakash Narkhede
- * @Youtube: https://www.youtube.com/automationtalks
- * @LinkedIn: https://www.linkedin.com/in/panarkhede89/
- */
 public class JiraOperations {
 	String jiraURL = PropertiesOperations.getPropertyValueByKey("jiraURL");
 	String jiraUserName = PropertiesOperations.getPropertyValueByKey("jiraUserName");

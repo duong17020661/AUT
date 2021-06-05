@@ -21,21 +21,31 @@ import com.aventstack.extentreports.Status;
 import testBase.DriverFactory;
 import testBase.ExtentFactory;
 import testBase.ExtentReportNG;
+import testBase.TestBase;
 
 public class ListenersImplementation implements ITestListener{
 	JiraOperations jiraOps = new JiraOperations();
+	TestBase testBase = new TestBase();
 	static ExtentReports report;
 		   ExtentTest test;
 		   
 	public void onTestStart(ITestResult result) {
-		//before each test case
-		test = report.createTest(result.getMethod().getMethodName());
-		ExtentFactory.getInstance().setExtent(test);
+//		try {
+//			testBase.LaunchApplication();
+//		}
+//		catch (Exception e){
+//
+//		}
+//		finally {
+			test = report.createTest(result.getMethod().getMethodName());
+			ExtentFactory.getInstance().setExtent(test);
+//		}
 	}
 
 	public void onTestSuccess(ITestResult result) {
 		ExtentFactory.getInstance().getExtent().log(Status.PASS, "Ca kiểm thử: "+result.getMethod().getMethodName()+ " thành công.");
 		ExtentFactory.getInstance().removeExtentObject();
+		testBase.tearDown();
 	}
 
 	public void onTestFailure(ITestResult result) {
@@ -79,7 +89,7 @@ public class ListenersImplementation implements ITestListener{
 				e.printStackTrace();
 			}
 		}
-
+		testBase.tearDown();
 	}
 
 	public void onTestSkipped(ITestResult result) {

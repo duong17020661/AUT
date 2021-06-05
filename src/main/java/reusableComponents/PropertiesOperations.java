@@ -1,11 +1,5 @@
 package reusableComponents;
 
-/**
- * @author: Prakash Narkhede
- * @Youtube: https://www.youtube.com/automationtalks
- * @LinkedIn: https://www.linkedin.com/in/panarkhede89/
- */
-
 import java.io.FileInputStream;
 import java.util.Properties;
 
