@@ -16,7 +16,6 @@ import org.apache.http.util.EntityUtils;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import sun.misc.BASE64Encoder;
 
 /**
  * @author: Prakash Narkhede
@@ -30,21 +29,21 @@ public class JiraOperations {
 
 
 	//create Jira Issue as bug
-	public String createJiraIssue(String ProjectName, String issueSummary, String issueDescription, String component, String priority, String label, String env, String assignee) throws ClientProtocolException, IOException, ParseException {
-		
+	public String createJiraIssue(String ProjectName, String issueSummary, String issueDescription, String label, String assignee) throws ClientProtocolException, IOException, ParseException {
+
 		String issueId = null; //to store issue / bug id.
-		
+
 		HttpClient httpClient = HttpClientBuilder.create().build();
 		String url = jiraURL+"/rest/api/3/issue";
 		HttpPost postRequest = new HttpPost(url);
-		postRequest.addHeader("Content-Type", "application/json");
+		postRequest.addHeader("content-type", "application/json");
 
+		//	BASE64Encoder base=new BASE64Encoder();
 		String encoding = Base64.getEncoder().encodeToString((jiraUserName+":"+jiraAccessKey).getBytes());
+		//String encoding = base.encode((jiraUserName+":"+jiraAccessKey).getBytes());
 		postRequest.setHeader("Authorization", "Basic " + encoding);
 
-		String str = createPayloadForCreateJiraIssue(ProjectName, issueSummary, issueDescription, component, priority, label, env, assignee);
-		StringEntity params = new StringEntity(createPayloadForCreateJiraIssue(ProjectName, issueSummary, issueDescription, component, priority, label, env, assignee));
-		params.setContentType("application/json");
+		StringEntity params = new StringEntity(createPayloadForCreateJiraIssue(ProjectName, issueSummary, issueDescription, priority, label, assignee));
 		postRequest.setEntity(params);
 		HttpResponse response = httpClient.execute(postRequest);
 
@@ -52,7 +51,7 @@ public class JiraOperations {
 		String jsonString = EntityUtils.toString(response.getEntity());
 
 		//convert sring to Json
-		JSONParser parser = new JSONParser();  
+		JSONParser parser = new JSONParser();
 		JSONObject json = (JSONObject) parser.parse(jsonString);
 
 		//extract issuekey from Json
@@ -63,69 +62,81 @@ public class JiraOperations {
 	}
 
 	//Add attachment to already created bug / issue in JIRA
-		public void addAttachmentToJiraIssue(String issueId, String filePath) throws ClientProtocolException, IOException 
-		{
-			String pathname= filePath; 
-			File fileUpload = new File(pathname);
+	public void addAttachmentToJiraIssue(String issueId, String filePath) throws ClientProtocolException, IOException
+	{
+		String pathname= filePath;
+		File fileUpload = new File(pathname);
 
-			HttpClient httpClient = HttpClientBuilder.create().build();
-			String url = jiraURL+"/rest/api/3/issue/"+issueId+"/attachments";
-			HttpPost postRequest = new HttpPost(url);
+		HttpClient httpClient = HttpClientBuilder.create().build();
+		String url = jiraURL+"/rest/api/3/issue/"+issueId+"/attachments";
+		HttpPost postRequest = new HttpPost(url);
 
-			String encoding = Base64.getEncoder().encodeToString((jiraUserName+":"+jiraAccessKey).getBytes());
+		//BASE64Encoder base=new BASE64Encoder();
+		//String encoding = base.encode((jiraUserName+":"+jiraAccessKey).getBytes());
+		String encoding = Base64.getEncoder().encodeToString((jiraUserName+":"+jiraAccessKey).getBytes());
 
-			postRequest.setHeader("Authorization", "Basic " + encoding);
-			postRequest.setHeader("X-Atlassian-Token","nocheck");
+		postRequest.setHeader("Authorization", "Basic " + encoding);
+		postRequest.setHeader("X-Atlassian-Token","nocheck");
 
-			MultipartEntityBuilder entity=MultipartEntityBuilder.create();
-			entity.addPart("file", new FileBody(fileUpload));
-			postRequest.setEntity( entity.build());
-			HttpResponse response = httpClient.execute(postRequest);
-			System.out.println(response.getStatusLine());
+		MultipartEntityBuilder entity=MultipartEntityBuilder.create();
+		entity.addPart("file", new FileBody(fileUpload));
+		postRequest.setEntity( entity.build());
+		HttpResponse response = httpClient.execute(postRequest);
+		System.out.println(response.getStatusLine());
 
-			if(response.getStatusLine().toString().contains("200 OK")){
-				System.out.println("Đã tải tệp đính kèm");
-			} else{
-				System.out.println("Không thể tải tệp đính kèm");
-			}
+		if(response.getStatusLine().toString().contains("200 OK")){
+			System.out.println("Attachment uploaded");
+		} else{
+			System.out.println("Attachment not uploaded");
 		}
-	
+	}
+
 	//creates payload for create issue post request
-	private static String createPayloadForCreateJiraIssue(String ProjectName, String issueSummary, String issueDescription, String componentId, String priority, String label, String env, String assigneeId) {
-		return "{\r\n" + 
-				"    \"fields\": {\r\n" + 
-				"       \"project\":\r\n" + 
-				"       {\r\n" + 
-				"          \"key\": \""+ProjectName+"\"\r\n" + 
-				"       },\r\n" + 
-				"       \"summary\": \""+issueSummary+"\",\r\n" + 
-				"	   \"description\": {\r\n" + 
-				"          \"type\": \"doc\",\r\n" + 
-				"          \"version\": 1,\r\n" + 
-				"          \"content\": [\r\n" + 
-				"				{\r\n" + 
-				"                    \"type\": \"paragraph\",\r\n" + 
-				"                    \"content\": [\r\n" + 
-				"								{\r\n" + 
-				"                                    \"text\": \""+issueDescription+"\",\r\n" + 
-				"                                    \"type\": \"text\"\r\n" + 
-				"								}\r\n" + 
-				"							   ]\r\n" + 
-				"				}\r\n" + 
-				"					]\r\n" + 
-				"						}, \r\n" + 
-				"		\"issuetype\": {\r\n" + 
-				"          \"name\": \"Bug\"\r\n" + 
+	private static String createPayloadForCreateJiraIssue(String ProjectName, String issueSummary, String issueDescription, String label, String assigneeId) {
+		return "{\r\n" +
+				"    \"fields\": {\r\n" +
+				"       \"project\":\r\n" +
+				"       {\r\n" +
+				"          \"key\": \""+ProjectName+"\"\r\n" +
 				"       },\r\n" +
-				"        \"labels\": [\r\n" + 
-				"      \""+label+"\"\r\n" + 
+				"       \"summary\": \""+issueSummary+"\",\r\n" +
+				"	   \"description\": {\r\n" +
+				"          \"type\": \"doc\",\r\n" +
+				"          \"version\": 1,\r\n" +
+				"          \"content\": [\r\n" +
+				"				{\r\n" +
+				"                    \"type\": \"paragraph\",\r\n" +
+				"                    \"content\": [\r\n" +
+				"								{\r\n" +
+				"                                    \"text\": \""+issueDescription+"\",\r\n" +
+				"                                    \"type\": \"text\"\r\n" +
+				"								}\r\n" +
+				"							   ]\r\n" +
+				"				}\r\n" +
+				"					]\r\n" +
+				"						}, \r\n" +
+				"		\"issuetype\": {\r\n" +
+				"          \"name\": \"Bug\"\r\n" +
+				"       },\r\n" +
+				"        \"labels\": [\r\n" +
+				"      \""+label+"\"\r\n" +
 				"    ],\r\n" +
-				"    	\"assignee\": {\r\n" + 
-				"      \"id\": \""+assigneeId+"\"\r\n" + 
-				"    }\r\n" + 
-				"}\r\n" + 
+				"    	\"environment\": {\r\n" +
+				"      \"type\": \"doc\",\r\n" +
+				"      \"version\": 1,\r\n" +
+				"      \"content\": [\r\n" +
+				"        {\r\n" +
+				"          \"type\": \"paragraph\",\r\n" +
+				"          \"content\": []\r\n" +
+				"        }\r\n" +
+				"      ]\r\n" +
+				"    },\r\n" +
+				"    	\"assignee\": {\r\n" +
+				"      \"id\": \""+assigneeId+"\"\r\n" +
+				"    }\r\n" +
+				"}\r\n" +
 				"}";
 	}
+
+
 }
-
-

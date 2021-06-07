@@ -12,7 +12,7 @@
 
 	<test name="Failed Test">
 		<classes>
-			<class name="Tests.HomeTest" />
+			<class name="Tests.TestCase" />
 		</classes>
 	</test> <!-- Test -->
 	<test name="Login Tests">

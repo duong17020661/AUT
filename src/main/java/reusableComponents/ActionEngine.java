@@ -19,10 +19,10 @@ public class ActionEngine {
 		try {
 			element.sendKeys(valueToBeSent);
 			//log success message in exgent report
-			ExtentFactory.getInstance().getExtent().log(Status.PASS, fieldName+"==> Nhập giá trị: "+valueToBeSent);
+			ExtentFactory.getInstance().getExtent().log(Status.PASS, "");
 		} catch (Exception e) {
 			//log failure in extent
-			ExtentFactory.getInstance().getExtent().log(Status.FAIL, "Nhập giá trị : "+fieldName + " không thành công với lỗi : "+e);
+			ExtentFactory.getInstance().getExtent().log(Status.FAIL, "");
 		}
 	}
 	public void uploadFile_custom(WebElement element, String fieldName, String valueToBeSent) {
@@ -30,9 +30,9 @@ public class ActionEngine {
 			element.sendKeys(valueToBeSent);
 			DriverFactory.getInstance().getDriver().findElement(By.id("terms")).click();
 			DriverFactory.getInstance().getDriver().findElement(By.id("send")).click();
-			ExtentFactory.getInstance().getExtent().log(Status.PASS, fieldName+"==> Tải tệp tin : "+valueToBeSent);
+			ExtentFactory.getInstance().getExtent().log(Status.PASS, "");
 		} catch (Exception e) {
-			ExtentFactory.getInstance().getExtent().log(Status.FAIL, "ải tệp tin : "+fieldName + " không thành công với lỗi : "+e);
+			ExtentFactory.getInstance().getExtent().log(Status.FAIL, "");
 		}
 	}
 	//Customized sendkeys method-> To log sendkeys message for every occ.
@@ -51,10 +51,10 @@ public class ActionEngine {
 				element.click();
 			}
 			//log success message in exgent report
-			ExtentFactory.getInstance().getExtent().log(Status.PASS, fieldName+"==> CHọn giá trị thành công ");
+			ExtentFactory.getInstance().getExtent().log(Status.PASS, "");
 		} catch (Exception e) {
 			//log failure in extent
-			ExtentFactory.getInstance().getExtent().log(Status.FAIL, "Không thể chọn giá trị " +fieldName +", có lỗi xảy ra: "+e);
+			ExtentFactory.getInstance().getExtent().log(Status.FAIL, "");
 		}
 	}
 
@@ -63,10 +63,10 @@ public class ActionEngine {
 		try {
 			element.click();
 			//log success message in exgent report
-			ExtentFactory.getInstance().getExtent().log(Status.PASS, fieldName+"==> CHọn giá trị thành công ");
+			ExtentFactory.getInstance().getExtent().log(Status.PASS, "");
 		} catch (Exception e) {
 			//log failure in extent
-			ExtentFactory.getInstance().getExtent().log(Status.FAIL, "Không thể chọn giá trị " +fieldName +", có lỗi xảy ra: "+e);
+			ExtentFactory.getInstance().getExtent().log(Status.FAIL, ""+e);
 		}
 	}
 
@@ -76,9 +76,9 @@ public class ActionEngine {
 		try {
 			element.clear();
 			Thread.sleep(250);
-			ExtentFactory.getInstance().getExtent().log(Status.PASS, fieldName+"==> Dữ liệu được làm trống thành công ");
+			ExtentFactory.getInstance().getExtent().log(Status.PASS, "");
 		} catch (Exception e) {
-			ExtentFactory.getInstance().getExtent().log(Status.FAIL, "Không thể làm trống dữ liệu: " +fieldName +", có lỗi xảy ra: "+e);
+			ExtentFactory.getInstance().getExtent().log(Status.FAIL, "");
 
 		} 
 	}
@@ -90,10 +90,10 @@ public class ActionEngine {
 			executor.executeScript("arguments[0].scrollIntoView(true);", element);
 			Actions actions = new Actions(DriverFactory.getInstance().getDriver());		
 			actions.moveToElement(element).build().perform();
-			ExtentFactory.getInstance().getExtent().log(Status.PASS, fieldName+"==> Hover thành công ");
+			ExtentFactory.getInstance().getExtent().log(Status.PASS, "");
 			Thread.sleep(1000);
 		}catch(Exception e){
-			ExtentFactory.getInstance().getExtent().log(Status.FAIL, "Không thể hover: " +fieldName +", có lỗi xảy ra: "+e);
+			ExtentFactory.getInstance().getExtent().log(Status.FAIL, "");
 
 		}
 	}
@@ -104,9 +104,9 @@ public class ActionEngine {
 		try {
 			Select s = new Select(element);
 			s.selectByVisibleText(ddVisibleText);
-			ExtentFactory.getInstance().getExtent().log(Status.PASS, fieldName+"==> Giá trị: "+ ddVisibleText + " đã được chọn");
+			ExtentFactory.getInstance().getExtent().log(Status.PASS, "");
 		} catch (Exception e) {
-			ExtentFactory.getInstance().getExtent().log(Status.FAIL, "Không thể chọn giá trị " +fieldName +"  , có lỗi xảy ra: "+e);
+			ExtentFactory.getInstance().getExtent().log(Status.FAIL, "");
 		}
 	}
 
@@ -115,9 +115,9 @@ public class ActionEngine {
 		try {
 			Select s = new Select(element);
 			s.selectByValue(ddValue);
-			ExtentFactory.getInstance().getExtent().log(Status.PASS, fieldName+"==> Giá trị: "+ ddValue + " đã được chọn");
+			ExtentFactory.getInstance().getExtent().log(Status.PASS, "");
 		} catch (Exception e) {
-			ExtentFactory.getInstance().getExtent().log(Status.FAIL, "Không thể chọn giá trị " +fieldName +"  , có lỗi xảy ra: "+e);
+			ExtentFactory.getInstance().getExtent().log(Status.FAIL, "");
 		}
 	}
 
@@ -125,7 +125,7 @@ public class ActionEngine {
 	public void assertEqualsString_custom(String expvalue, String actualValue, String locatorName) throws Throwable {
 		try {
 			if(actualValue == null) {
-				ExtentFactory.getInstance().getExtent().log(Status.PASS, "Đã thêm giá trị " + actualValue + "Vào bảng " + locatorName);
+				ExtentFactory.getInstance().getExtent().log(Status.PASS, "");
 			}else {
 				ExtentFactory.getInstance().getExtent().log(Status.FAIL, expvalue);
 				Assert.assertTrue(false);
@@ -140,10 +140,10 @@ public class ActionEngine {
 		String text = "";
 		try {
 			text = element.getText();
-			ExtentFactory.getInstance().getExtent().log(Status.PASS, fieldName+"==> Giá trị nhận được là: "+ text);
+			ExtentFactory.getInstance().getExtent().log(Status.PASS, "");
 			return text;
 		} catch (Exception e) {		
-			ExtentFactory.getInstance().getExtent().log(Status.FAIL, fieldName+"==> Không thể lấy được giá trị in put: "+ e);
+			ExtentFactory.getInstance().getExtent().log(Status.FAIL, "");
 
 		}
 		return text;
