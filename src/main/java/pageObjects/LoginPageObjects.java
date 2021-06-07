@@ -1,10 +1,12 @@
 package pageObjects;
 
 
-import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
+<<<<<<< HEAD
 
 import org.testng.Assert;
+=======
+>>>>>>> 21fbe2ae0a9c0d6103b884be7203e210639c6c46
 import testBase.DriverFactory;
 import testBase.TestBase;
 

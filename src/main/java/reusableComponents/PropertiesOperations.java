@@ -1,10 +1,13 @@
 package reusableComponents;
 
+<<<<<<< HEAD
 import java.io.FileInputStream;
 import java.util.Properties;
 
 import org.apache.commons.lang3.StringUtils;
 
+=======
+>>>>>>> 21fbe2ae0a9c0d6103b884be7203e210639c6c46
 import java.io.FileInputStream;
 import java.util.Properties;
 

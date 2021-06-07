@@ -2,11 +2,7 @@ package reusableComponents;
 
 import java.sql.*;
 import java.util.HashMap;  
-/**
- * @author: Prakash Narkhede
- * @Youtube: https://www.youtube.com/automationtalks
- * @LinkedIn: https://www.linkedin.com/in/panarkhede89/
- */
+
 public class DB_Operations {
 	
 		public synchronized HashMap<String, String> getSqlResultInMap(String sql) {  

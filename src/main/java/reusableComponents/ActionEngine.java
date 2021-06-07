@@ -25,30 +25,36 @@ public class ActionEngine {
 			ExtentFactory.getInstance().getExtent().log(Status.FAIL, "");
 		}
 	}
+
 	public void uploadFile_custom(WebElement element, String fieldName, String valueToBeSent) {
 		try {
 			element.sendKeys(valueToBeSent);
+<<<<<<< HEAD
 			DriverFactory.getInstance().getDriver().findElement(By.id("terms")).click();
 			DriverFactory.getInstance().getDriver().findElement(By.id("send")).click();
 			ExtentFactory.getInstance().getExtent().log(Status.PASS, "");
+=======
+			ExtentFactory.getInstance().getExtent().log(Status.PASS, fieldName+"==> Tải tệp tin : "+valueToBeSent);
+>>>>>>> 21fbe2ae0a9c0d6103b884be7203e210639c6c46
 		} catch (Exception e) {
 			ExtentFactory.getInstance().getExtent().log(Status.FAIL, "");
 		}
 	}
+
 	//Customized sendkeys method-> To log sendkeys message for every occ.
-	public void selectedCheckbox_custom(WebElement element, String fieldName, int value) {
+	public void selectedCheckbox_custom(WebElement element, WebElement checkElement, String fieldName, int value) {
 		try {
 			if (element.isSelected() && value == 0) {
-				element.click();
+				checkElement.click();
 			}
 			else if (element.isSelected() && value == 1) {
-//				element.click();
+//				checkElement.click();
 			}
 			else if (!element.isSelected() && value == 0) {
-//				element.click();
+//				checkElement.click();
 			}
 			else if (!element.isSelected() && value == 1) {
-				element.click();
+				checkElement.click();
 			}
 			//log success message in exgent report
 			ExtentFactory.getInstance().getExtent().log(Status.PASS, "");
@@ -71,6 +77,7 @@ public class ActionEngine {
 	}
 
 
+<<<<<<< HEAD
 	//clear data from field
 	public void clear_custom(WebElement element,String fieldName) {
 		try {
@@ -83,6 +90,8 @@ public class ActionEngine {
 		} 
 	}
 
+=======
+>>>>>>> 21fbe2ae0a9c0d6103b884be7203e210639c6c46
 	//custom mouseHover 
 	public void moveToElement_custom(WebElement element,String fieldName){
 		try{
@@ -110,6 +119,7 @@ public class ActionEngine {
 		}
 	}
 
+<<<<<<< HEAD
 	//Select dropdown value value by value
 	public void selectDropDownByValue_custom(WebElement element, String fieldName, String ddValue) throws Throwable {
 		try {
@@ -120,14 +130,21 @@ public class ActionEngine {
 			ExtentFactory.getInstance().getExtent().log(Status.FAIL, "");
 		}
 	}
+=======
+>>>>>>> 21fbe2ae0a9c0d6103b884be7203e210639c6c46
 
 	//String Asserts
 	public void assertEqualsString_custom(String expvalue, String actualValue, String locatorName) throws Throwable {
 		try {
+<<<<<<< HEAD
 			if(actualValue == null) {
 				ExtentFactory.getInstance().getExtent().log(Status.PASS, "");
+=======
+			if(expvalue.equals(actualValue) == true) {
+				ExtentFactory.getInstance().getExtent().log(Status.PASS, "String Assertion is successful on field "+ locatorName + " Expected value was: "+ expvalue + " actual value is: "+actualValue);
+>>>>>>> 21fbe2ae0a9c0d6103b884be7203e210639c6c46
 			}else {
-				ExtentFactory.getInstance().getExtent().log(Status.FAIL, expvalue);
+				ExtentFactory.getInstance().getExtent().log(Status.FAIL, "String Assertion FAILED on field "+ locatorName + " Expected value was: "+ expvalue + " actual value is: "+actualValue);
 				Assert.assertTrue(false);
 			}
 		} catch (Exception e) {
@@ -135,6 +152,7 @@ public class ActionEngine {
 		}
 	}
 
+<<<<<<< HEAD
 	//Get text from webelement
 	public String getText_custom(WebElement element, String fieldName) {
 		String text = "";
@@ -149,4 +167,6 @@ public class ActionEngine {
 		return text;
 	}
 
+=======
+>>>>>>> 21fbe2ae0a9c0d6103b884be7203e210639c6c46
 }

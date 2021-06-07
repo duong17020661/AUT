@@ -12,12 +12,17 @@
 
 	<test name="Failed Test">
 		<classes>
+<<<<<<< HEAD
 			<class name="Tests.TestCase" />
 		</classes>
 	</test> <!-- Test -->
 	<test name="Login Tests">
 		<classes>
 			<class name="Tests.UserLoginTests" />
+=======
+			<class name="Tests.Runner" />
+>>>>>>> 21fbe2ae0a9c0d6103b884be7203e210639c6c46
 		</classes>
 	</test> <!-- Test -->
+
 </suite> <!-- Suite -->

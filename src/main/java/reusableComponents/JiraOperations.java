@@ -17,11 +17,6 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-/**
- * @author: Prakash Narkhede
- * @Youtube: https://www.youtube.com/automationtalks
- * @LinkedIn: https://www.linkedin.com/in/panarkhede89/
- */
 public class JiraOperations {
 	String jiraURL = PropertiesOperations.getPropertyValueByKey("jiraURL");
 	String jiraUserName = PropertiesOperations.getPropertyValueByKey("jiraUserName");
@@ -30,7 +25,11 @@ public class JiraOperations {
 
 	//create Jira Issue as bug
 	public String createJiraIssue(String ProjectName, String issueSummary, String issueDescription, String label, String assignee) throws ClientProtocolException, IOException, ParseException {
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> 21fbe2ae0a9c0d6103b884be7203e210639c6c46
 		String issueId = null; //to store issue / bug id.
 
 		HttpClient httpClient = HttpClientBuilder.create().build();
@@ -43,7 +42,12 @@ public class JiraOperations {
 		//String encoding = base.encode((jiraUserName+":"+jiraAccessKey).getBytes());
 		postRequest.setHeader("Authorization", "Basic " + encoding);
 
+<<<<<<< HEAD
 		StringEntity params = new StringEntity(createPayloadForCreateJiraIssue(ProjectName, issueSummary, issueDescription, priority, label, assignee));
+=======
+		StringEntity params = new StringEntity(createPayloadForCreateJiraIssue(ProjectName, issueSummary, issueDescription, label, assignee));
+		params.setContentType("application/json");
+>>>>>>> 21fbe2ae0a9c0d6103b884be7203e210639c6c46
 		postRequest.setEntity(params);
 		HttpResponse response = httpClient.execute(postRequest);
 
@@ -93,6 +97,7 @@ public class JiraOperations {
 
 	//creates payload for create issue post request
 	private static String createPayloadForCreateJiraIssue(String ProjectName, String issueSummary, String issueDescription, String label, String assigneeId) {
+<<<<<<< HEAD
 		return "{\r\n" +
 				"    \"fields\": {\r\n" +
 				"       \"project\":\r\n" +
@@ -135,6 +140,43 @@ public class JiraOperations {
 				"      \"id\": \""+assigneeId+"\"\r\n" +
 				"    }\r\n" +
 				"}\r\n" +
+=======
+		return "{\n" +
+				"\"fields\": {\n" +
+				"    \"summary\": \"" + ProjectName + ": " + issueSummary+ "\",\n" +
+				"    \"issuetype\": {\n" +
+				"      \"id\": \"10004\"\n" +
+				"    },\n" +
+				"    \"project\": {\n" +
+				"      \"id\": \"10000\"\n" +
+				"    },\n" +
+				"    \"description\": {\n" +
+				"      \"type\": \"doc\",\n" +
+				"      \"version\": 1,\n" +
+				"      \"content\": [\n" +
+				"        {\n" +
+				"          \"type\": \"paragraph\",\n" +
+				"          \"content\": [\n" +
+				"            {\n" +
+				"              \"text\": \"Description\",\n" +
+				"              \"type\": \"text\"\n" +
+				"            }\n" +
+				"          ]\n" +
+				"        }\n" +
+				"      ]\n" +
+				"    },\n" +
+				"    \"reporter\": {\n" +
+				"      \"id\": \"606a7a842b469c00701afd8d\"\n" +
+				"    },\n" +
+				"    \"labels\": [\n" +
+				"      \""+label+"\"\n" +
+				"    ],\n" +
+				"\n" +
+				"    \"assignee\": {\n" +
+				"      \"id\": \""+assigneeId+"\"\n" +
+				"    }\n" +
+				"  }\n" +
+>>>>>>> 21fbe2ae0a9c0d6103b884be7203e210639c6c46
 				"}";
 	}
 

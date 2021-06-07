@@ -21,6 +21,7 @@ import com.aventstack.extentreports.Status;
 import testBase.DriverFactory;
 import testBase.ExtentFactory;
 import testBase.ExtentReportNG;
+import testBase.TestBase;
 
 /**
  * @author: Prakash Narkhede
@@ -29,18 +30,27 @@ import testBase.ExtentReportNG;
  */
 public class ListenersImplementation implements ITestListener{
 	JiraOperations jiraOps = new JiraOperations();
+	TestBase testBase = new TestBase();
 	static ExtentReports report;
 	ExtentTest test;
 
 	public void onTestStart(ITestResult result) {
-		//before each test case
-		test = report.createTest(result.getMethod().getMethodName());
-		ExtentFactory.getInstance().setExtent(test);
+//		try {
+//			testBase.LaunchApplication();
+//		}
+//		catch (Exception e){
+//
+//		}
+//		finally {
+			test = report.createTest(result.getMethod().getMethodName());
+			ExtentFactory.getInstance().setExtent(test);
+//		}
 	}
 
 	public void onTestSuccess(ITestResult result) {
 		ExtentFactory.getInstance().getExtent().log(Status.PASS, "Test Case: "+result.getMethod().getMethodName()+ " is Passed.");
 		ExtentFactory.getInstance().removeExtentObject();
+		testBase.tearDown();
 	}
 
 	public void onTestFailure(ITestResult result) {
@@ -76,7 +86,11 @@ public class ListenersImplementation implements ITestListener{
 			String issueD = "Test Data to be passed here.";
 			String issueNumber = null;
 			try {
+<<<<<<< HEAD
 				issueNumber = jiraOps.createJiraIssue("AutomationTest", issueS, issueD, "AUT", "606a7a842b469c00701afd8d");
+=======
+				issueNumber = jiraOps.createJiraIssue("AutoTest", issueS, issueD, "AUT", "606a7a842b469c00701afd8d");
+>>>>>>> 21fbe2ae0a9c0d6103b884be7203e210639c6c46
 			} catch (Exception e1) {
 				e1.printStackTrace();
 			}
@@ -86,7 +100,7 @@ public class ListenersImplementation implements ITestListener{
 				e.printStackTrace();
 			}
 		}
-
+		testBase.tearDown();
 	}
 
 	public void onTestSkipped(ITestResult result) {
